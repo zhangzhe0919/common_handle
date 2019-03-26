@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="inputObj">
+</body>
+<script src="./jquery.min.js"></script>
+<script>
+    var inputObj =  $('#inputObj');
+    
+    inputObj.on('input', function() {
+
+    })
+
+    inputObj.on('keyup', function() {
+        //获取当前光标的位置
+        var caret = this.selectionStart;
+        //获取当前的value
+        var value = this.value;
+        //从左边沿到坐标之间的空格数
+        var sp =  (value.slice(0, caret).match(/\s/g) || []).length;
+        //去掉所有空格
+        var nospace = value.replace(/\s/g, '');
+        //重新插入空格
+        var curVal = this.value = nospace.replace(/\D+/g,"").replace(/(\d{4})/g, "$1 ").trim();
+        //从左边沿到原坐标之间的空格数
+        var curSp = (curVal.slice(0, caret).match(/\s/g) || []).length;
+        //修正光标位置
+        this.selectionEnd = this.selectionStart = caret + curSp - sp;
+    })
+</script>
+<!--
+<script type="text/javascript">
+    window.onload = function() {
+        var t = document.getElementById("inputObj");
+        t.onkeydown = change;
+        t.onkeyup = change;
+        t.onkeypress = change;
+    }
+    function change() {
+        this.value = this.value.replace(/\D/g, '').replace(/....(?!$)/g, '$& '); //替换空格前4位数字为4位数字加空格
+    }
+</script>-->
+
+</html>
