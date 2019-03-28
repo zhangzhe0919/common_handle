@@ -147,3 +147,22 @@ var trimString = function (data) {
 	return data.replace(/\s+/g,'');
 };
 
+/*获取url的传递的值*/
+var getUrlParam = function (){
+	var searchStr=location.search;
+	if(searchStr==""){
+			return {};
+	}
+	var param=searchStr.slice(1,searchStr.length);		
+	var moreParamArr=param.split("&");
+	var getParam={};
+	for(var i=0;i<moreParamArr.length;i++){
+			if(moreParamArr[i]!=""){
+				var paramArr=moreParamArr[i].split("=");
+				getParam[paramArr[0]]=paramArr[1];				
+			}
+	}
+	console.log(getParam);
+	return getParam;
+};
+
