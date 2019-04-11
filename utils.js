@@ -166,3 +166,23 @@ var getUrlParam = function (){
 	return getParam;
 };
 
+/**
+   *  微信里动态修改页面title
+   *
+   * @param {*} title 标题
+   */
+  function setDocumentTitle(title) {
+    document.title = title;
+    if (/ip(hone|od|ad)/i.test(navigator.userAgent)) {
+      var i = document.createElement('iframe');
+      i.src = '/favicon.ico';
+      i.style.display = 'none';
+      i.onload = function () {
+        setTimeout(function () {
+          i.remove();
+        }, 9);
+      };
+      document.body.appendChild(i);
+    }
+  }
+
