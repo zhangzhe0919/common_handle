@@ -280,3 +280,17 @@ function formatDate (date, fmt) {
   }
  return fmt; 
 }      
+
+
+export const currentEnv = () => {
+  const ua = navigator.userAgent;
+
+  if (ua.toLowerCase().match(/MicroMessenger/i) === 'micromessenger') {
+    return 'WX'
+  } else if (ua.match(/(iPhone|iPod|iPad);?/i)) {
+    return 'IOS'
+  } else if (ua.match(/android/i)) {
+    return 'Android'
+  }
+  return null;
+};
