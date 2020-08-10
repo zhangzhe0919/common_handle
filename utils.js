@@ -294,3 +294,22 @@ export const currentEnv = () => {
   }
   return null;
 };
+
+// 后端返回文件流
+function downLoadFile(data, type) {
+  const content = data
+  const blob = new Blob([content])
+  const fileName = type + '_' + formatDate(new Date(), 'yyyyMMddhhmmss') + '.xlsx'
+  if ('download' in document.createElement('a')) {
+    const elink = document.createElement('a')
+    elink.download = fileName
+    elink.style.display = 'none'
+    elink.href = URL.createObjectURL(blob)
+    document.body.appendChild(elink)
+    elink.click()
+    URL.revokeObjectURL(elink.href) // 释放URL 对象
+    document.body.removeChild(elink)
+  } else { 
+    navigator.msSaveBlob(blob, fileName)
+  }
+}
