@@ -254,32 +254,37 @@ var getUrlParam = function (){
 
 
 // 格式化日期
-function formatDate (date, fmt) { 
+export const formatDate = (date, fmt) => {
   if (!date || !fmt) {
     return ''
   }
 
+  if (typeof date === "string") {
+    // ios 不支持带 ‘-’ 的时间格式，需转换成 ‘/’
+    date = date.replace(/-/g, '/')
+  }
+
   let _that = new Date(date)
 
-  var o = { 
-     "M+" : _that.getMonth()+1,                 //月份 
-     "d+" : _that.getDate(),                    //日 
-     "h+" : _that.getHours(),                   //小时 
-     "m+" : _that.getMinutes(),                 //分 
-     "s+" : _that.getSeconds(),                 //秒 
-     "q+" : Math.floor((_that.getMonth()+3)/3), //季度 
-     "S"  : _that.getMilliseconds()             //毫秒 
- }; 
- if(/(y+)/.test(fmt)) {
-         fmt=fmt.replace(RegExp.$1, (_that.getFullYear()+"").substr(4 - RegExp.$1.length)); 
- }
-  for(var k in o) {
-     if(new RegExp("("+ k +")").test(fmt)){
-          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
-      }
+  var o = {
+    "M+": _that.getMonth() + 1,                 //月份
+    "d+": _that.getDate(),                    //日
+    "h+": _that.getHours(),                   //小时
+    "m+": _that.getMinutes(),                 //分
+    "s+": _that.getSeconds(),                 //秒
+    "q+": Math.floor((_that.getMonth() + 3) / 3), //季度
+    "S": _that.getMilliseconds()             //毫秒
+  };
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (_that.getFullYear() + "").substr(4 - RegExp.$1.length));
   }
- return fmt; 
-}      
+  for (var k in o) {
+    if (new RegExp("(" + k + ")").test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    }
+  }
+  return fmt;
+};      
 
 
 export const currentEnv = () => {
