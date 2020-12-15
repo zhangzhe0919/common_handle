@@ -318,3 +318,24 @@ function downLoadFile(data, type) {
     navigator.msSaveBlob(blob, fileName)
   }
 }
+
+
+/**
+ * 
+ * @param { 判断是否为 '', ' ', undefined, null, {}, [] } data 
+ */
+export const isEmptyData = function (data) {
+
+  if (data == null || data == undefined) {
+    return true
+  } else {
+    let _type = typeof data
+    if (_type == 'string') {
+      return data.replace(/\s+/g, '').length == 0
+    } else if (_type == 'object') {
+      return Object.keys(data).length == 0
+    }
+  }
+
+  return false
+}
