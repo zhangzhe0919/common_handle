@@ -259,12 +259,19 @@ export const formatDate = (date, fmt) => {
     return ''
   }
 
-  if (typeof date === "string") {
-    // ios 不支持带 ‘-’ 的时间格式，需转换成 ‘/’
-    date = date.replace(/-/g, '/')
+  let _that = new Date(date)
+
+  if (_that.toString() === 'Invalid Date') {
+    if (typeof date === "string") {
+      // ios 不支持带 ‘-’ 的时间格式，需转换成 ‘/’
+      date = date.replace(/-/g, '/')
+      _that = new Date(date)
+    }
   }
 
-  let _that = new Date(date)
+  if (_that.toString() === 'Invalid Date') {
+    _that = new Date()
+  }
 
   var o = {
     "M+": _that.getMonth() + 1,                 //月份
@@ -284,7 +291,7 @@ export const formatDate = (date, fmt) => {
     }
   }
   return fmt;
-};      
+};     
 
 
 export const currentEnv = () => {
