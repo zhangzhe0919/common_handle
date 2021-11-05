@@ -389,3 +389,23 @@ function debounce(func, wait, immediate) {
         return result;
     }
 }
+
+// 定时器
+function myTimer(callback, times) {
+    let timer = null;
+    const now = Date.now
+    let startTime = now()
+    let endTime = startTime
+    
+    const loop = () => {
+        timer = window.requestAnimationFrame(loop);
+        endTime = now()
+        if (endTime - startTime >= times) {
+          startTime = endTime = now()
+          callback(timer)
+        }
+    }
+
+    timer = window.requestAnimationFrame(loop)
+    return timer;
+}
