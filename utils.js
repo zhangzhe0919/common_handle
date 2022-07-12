@@ -418,3 +418,12 @@ function aesEncodeData(data, secretKey) {
     // @ts-ignore
   },).toString();
 }
+
+// AES解密
+const decroptyData = (aeskey, encroptyData) => {
+  const key = CryptoJS.enc.Utf8.parse(aeskey);
+  return CryptoJS.AES.decrypt(encroptyData, key, {
+          mode: CryptoJS.mode.ECB,
+          padding: CryptoJS.pad.Pkcs7,
+      }).toString(CryptoJS.enc.Utf8) || null;
+}
