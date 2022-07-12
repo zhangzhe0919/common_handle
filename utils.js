@@ -409,3 +409,12 @@ function myTimer(callback, times) {
     timer = window.requestAnimationFrame(loop)
     return timer;
 }
+
+// AES 加密
+function aesEncodeData(data, secretKey) {
+  return CryptoJS.AES.encrypt(data, CryptoJS.enc.Utf8.parse(secretKey), {
+    mode: CryptoJS.mode.ECB,
+    padding: CryptoJS.pad.Pkcs7,
+    // @ts-ignore
+  },).toString();
+}
