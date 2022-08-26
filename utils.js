@@ -154,6 +154,9 @@ var trimString = function (data) {
  * @returns {string}
  */
 function getQueryString (name, url) {
+    if (typeof name !== 'string') {
+    	return null;
+    }	
     const result = {};
     let search = url ? url : window.location.search;
     search.replace(/([^&=?]+)=([^&]+)/g, (m, $1, $2) => {
