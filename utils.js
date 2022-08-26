@@ -147,24 +147,20 @@ var trimString = function (data) {
 	return data.replace(/\s+/g,'');
 };
 
-/*获取url的传递的值*/
-var getUrlParam = function (){
-	var searchStr=location.search;
-	if(searchStr==""){
-			return {};
-	}
-	var param=searchStr.slice(1,searchStr.length);		
-	var moreParamArr=param.split("&");
-	var getParam={};
-	for(var i=0;i<moreParamArr.length;i++){
-			if(moreParamArr[i]!=""){
-				var paramArr=moreParamArr[i].split("=");
-				getParam[paramArr[0]]=paramArr[1];				
-			}
-	}
-	console.log(getParam);
-	return getParam;
-};
+/**
+ * 使用正则表达式简化逻辑
+ * 获取url value
+ * @param name
+ * @returns {string}
+ */
+function getQueryString (name, url) {
+    const result = {};
+    let search = url ? url : window.location.search;
+    search.replace(/([^&=?]+)=([^&]+)/g, (m, $1, $2) => {
+        result[$1] = decodeURIComponent($2);
+    })
+    return result[name] || null;
+}
 
 /**
    *  微信里动态修改页面title
@@ -345,21 +341,6 @@ export const isEmptyData = function (data) {
   }
 
   return false
-}
-
-/**
- * 使用正则表达式简化逻辑
- * 获取url value
- * @param name
- * @returns {string}
- */
-function getQueryString (name, url) {
-    const result = {};
-    let search = url ? url : window.location.search;
-    search.replace(/([^&=?]+)=([^&]+)/g, (m, $1, $2) => {
-        result[$1] = decodeURIComponent($2);
-    })
-    return result[name] || null;
 }
 
 
