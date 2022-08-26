@@ -348,19 +348,18 @@ export const isEmptyData = function (data) {
 }
 
 /**
+ * 使用正则表达式简化逻辑
  * 获取url value
  * @param name
  * @returns {string}
  */
-function getQueryString (name) {
-  let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-  const _tempPath = decodeURIComponent(window.location.search);
-  let r = _tempPath.substr(1).match(reg);
-  let context = "";
-  if (r != null) { context = r[2]; }
-  reg = null;
-  r = null;
-  return context == null || context === "" || context === "undefined" ? "" : context;
+function getQueryString (name, url) {
+    const result = {};
+    let search = url ? url : window.location.search;
+    search.replace(/([^&=?]+)=([^&]+)/g, (m, $1, $2) => {
+        result[$1] = decodeURIComponent($2);
+    })
+    return result[name] || null;
 }
 
 
