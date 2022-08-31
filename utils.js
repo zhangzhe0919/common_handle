@@ -410,3 +410,29 @@ const decroptyData = (aeskey, encroptyData) => {
           padding: CryptoJS.pad.Pkcs7,
       }).toString(CryptoJS.enc.Utf8) || null;
 }
+
+// 深度克隆
+function deepClone(obj) {
+
+    //console.time('deepClone');
+
+    if (obj && typeof obj !== 'object') {
+
+        return obj;
+    }
+
+    let result = Object.create(obj.__proto__);
+
+    for(let i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            result[i] = obj[i];
+        } else {
+            result[i] = deepClone(obj[i])
+        }
+    }
+
+    //console.timeEnd('deepClone');
+
+    return result;
+}
+
