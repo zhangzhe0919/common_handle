@@ -436,3 +436,19 @@ function deepClone(obj) {
     return result;
 }
 
+// 扁平化。Array.flat();
+function flatDeep(arr, result=[]) {
+    if (!arr || !(arr instanceof Array) || arr.length === 0 ) {
+        return [];
+    }
+
+    for(let i of arr) {
+        if (i instanceof Array) {
+            result.concat(flatDeep(i, result));
+        } else {
+            result.push(i);
+        }
+    }
+
+    return result;
+}
