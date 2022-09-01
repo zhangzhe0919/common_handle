@@ -153,6 +153,14 @@ var trimString = function (data) {
  * @param name
  * @returns {string}
  */
+function getSearchParams (name, url) {
+  const searchPar = new URLSearchParams(url ? url : window.location.search)
+  const paramsObj = {}
+  for (const [key, value] of searchPar.entries()) {
+    paramsObj[key] = value
+  }
+  return paramsObj[name] || null;
+}
 function getQueryString (name, url) {
     if (typeof name !== 'string') {
     	return null;
@@ -164,6 +172,7 @@ function getQueryString (name, url) {
     })
     return result[name] || null;
 }
+
 
 /**
    *  微信里动态修改页面title
