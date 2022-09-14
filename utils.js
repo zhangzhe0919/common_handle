@@ -441,9 +441,8 @@ function myTimer(callback, times) {
 }
 
 // AES 加密
-function aesEncodeData(data, secretKey, secretIv) {
-  return CryptoJS.AES.encrypt(data, CryptoJS.enc.Utf8.parse(secretKey), {
-    iv: CryptoJS.enc.Utf8.parse(secretIv),		  
+function aesEncodeData(data, secretKey) {
+  return CryptoJS.AES.encrypt(data, CryptoJS.enc.Utf8.parse(secretKey), {		  
     mode: CryptoJS.mode.ECB,
     padding: CryptoJS.pad.Pkcs7,
     // @ts-ignore
@@ -451,9 +450,8 @@ function aesEncodeData(data, secretKey, secretIv) {
 }
 
 // AES解密
-const decroptyData = (aeskey, encroptyData, secretIv) => {
+const decroptyData = (aeskey, encroptyData) => {
   return CryptoJS.AES.decrypt(encroptyData, CryptoJS.enc.Utf8.parse(aeskey), {
-	  iv: CryptoJS.enc.Utf8.parse(secretIv),
           mode: CryptoJS.mode.ECB,
           padding: CryptoJS.pad.Pkcs7,
       }).toString(CryptoJS.enc.Utf8) || null;
