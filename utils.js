@@ -295,7 +295,7 @@ export const formatDate = (date, fmt) => {
   }
   for (var k in o) {
     if (new RegExp("(" + k + ")").test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("" + o[k]).padStart(2, '0')));
+      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : ("" + o[k]).padStart(2, '0'));
     }
   }
   return fmt;
@@ -333,7 +333,7 @@ export const formatDate = (date: DateTypes, fmt: string) => {
   for (const k in o) {
     if (new RegExp("(" + k + ")").test(fmt)) {
       const _result = o[k as keyof typeof o]
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? _result : _result.padStart(2, '0'));
+      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? _result : _result.padStart(2, '0'));
     }
   }
   return fmt;
