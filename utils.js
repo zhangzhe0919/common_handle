@@ -139,7 +139,7 @@ var fmtBankAccountByFour = function (accno) {
 	}
 };
 
-// 字符串三位一分
+// 字符串分割。 多规则分割事例
 str.replace(/\d{1,3}(?=(\d{3})+$)/g, res => {
     return res + ','
 })
