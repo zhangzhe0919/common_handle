@@ -139,6 +139,11 @@ var fmtBankAccountByFour = function (accno) {
 	}
 };
 
+// 字符串三位一分
+str.replace(/\d{1,3}(?=(\d{3})+$)/g, res => {
+    return res + ','
+})
+
 // 去掉字符串的空格
 var trimString = function (data) {
 	if (!data) {
