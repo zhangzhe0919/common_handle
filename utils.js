@@ -464,26 +464,28 @@ const decroptyData = (aeskey, encroptyData) => {
 
 // 深度克隆
 function deepClone(obj) {
-
-    //console.time('deepClone');
-
-    if (obj && typeof obj !== 'object') {
+    if ( !obj || typeof obj !== 'object') {
 
         return obj;
     }
 
-    let result = Object.create(obj.__proto__);
+    let result;
 
+    if (obj instanceof Array) {
+        result = []
+    } else {
+        result = {}
+    }
+    
     for(let i in obj) {
         if (obj.hasOwnProperty(i)) {
-            result[i] = obj[i];
-        } else {
-            result[i] = deepClone(obj[i])
+            if (typeof obj[i] && typeof obj[i] !== 'object') {
+                result[i] = obj[i];
+            } else {
+                result[i] = deepClone(obj[i])
+            }
         }
     }
-
-    //console.timeEnd('deepClone');
-
     return result;
 }
 
