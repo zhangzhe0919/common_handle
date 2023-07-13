@@ -510,3 +510,9 @@ function flatDeep(arr, result=[]) {
 const hideMobile = (mobile) => {
   return mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")
 }
+
+const computeAge = birthday => {
+  let _birthday = new Date(birthday.replace(/-/g, "\/"));
+  let currentDate = new Date();
+  return currentDate.getFullYear()-_birthday.getFullYear()-((currentDate.getMonth()<_birthday.getMonth()|| currentDate.getMonth()==_birthday.getMonth() && currentDate.getDate()<_birthday.getDate())?1:0);
+}
