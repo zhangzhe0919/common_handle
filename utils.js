@@ -506,6 +506,9 @@ function flatDeep(arr, result=[]) {
     return result;
 }
 
+// 校验手机号
+const checkMobile = phone => /^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}$/.test(phone)
+
 // 手机号脱敏
 const hideMobile = (mobile) => {
   return mobile.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")
