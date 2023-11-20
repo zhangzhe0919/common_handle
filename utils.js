@@ -519,3 +519,18 @@ const computeAge = birthday => {
   let currentDate = new Date();
   return currentDate.getFullYear()-_birthday.getFullYear()-((currentDate.getMonth()<_birthday.getMonth()|| currentDate.getMonth()==_birthday.getMonth() && currentDate.getDate()<_birthday.getDate())?1:0);
 }
+
+
+// 下载文件方法
+export const fileDownload = (url, filename) => {
+  var eleLink = document.createElement('a');
+  eleLink.download = filename;
+  eleLink.style.display = 'none';
+  // 字符内容转变成blob地址
+  eleLink.href = url;
+  // 触发点击
+  document.body.appendChild(eleLink);
+  eleLink.click();
+  // 然后移除
+  document.body.removeChild(eleLink);
+};
